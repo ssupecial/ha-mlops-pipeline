@@ -105,7 +105,7 @@ pip install -r requirements.txt
        ▼
 ┌─────────────┐
 │print_result │  ← 최종 결과 출력
-│   (출력)    │
+│   (출력)     │
 └─────────────┘
 ```
 
