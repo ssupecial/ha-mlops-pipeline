@@ -192,10 +192,10 @@ import os
 import mlflow
 
 # 환경 변수 설정
-os.environ['MLFLOW_TRACKING_URI'] = 'http://mlflow-server-service.mlflow-system.svc.cluster.local:5000'
+os.environ['MLFLOW_TRACKING_URI'] = 'http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000'
 
 # 또는 직접 설정
-mlflow.set_tracking_uri('http://mlflow-server-service.mlflow-system.svc.cluster.local:5000')
+mlflow.set_tracking_uri('http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000')
 ```
 
 ### ❌ MLflow S3 연결 오류

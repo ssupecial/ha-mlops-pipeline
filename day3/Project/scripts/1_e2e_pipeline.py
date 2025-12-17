@@ -251,7 +251,7 @@ def send_alert(run_id: str, message: str):
 )
 def e2e_pipeline(
     data_source: str = "sklearn",
-    mlflow_tracking_uri: str = "http://mlflow-server-service.mlflow-system.svc.cluster.local:5000",
+    mlflow_tracking_uri: str = "http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000",
     experiment_name: str = DEFAULT_EXPERIMENT_NAME,
     model_name: str = DEFAULT_MODEL_NAME,
     namespace: str = DEFAULT_NAMESPACE,  # ⚠️ 동적 기본값!

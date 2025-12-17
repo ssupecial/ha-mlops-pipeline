@@ -4,7 +4,7 @@ Lab 3-3: Benchmark & MLflow
 원본, ONNX, 양자화 모델의 성능 벤치마크 및 MLflow 기록
 
 실행: 
-  export MLFLOW_TRACKING_URI=http://mlflow-server-service.mlflow-system.svc.cluster.local:5000
+  export MLFLOW_TRACKING_URI=http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000
   python scripts/3_benchmark.py
 
 사전 요구: 
@@ -214,7 +214,7 @@ def main():
     # MLflow 서버 URI 설정
     mlflow_uri = os.environ.get(
         'MLFLOW_TRACKING_URI',
-        'http://mlflow-server-service.mlflow-system.svc.cluster.local:5000'
+        'http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000'
     )
     mlflow.set_tracking_uri(mlflow_uri)
     print(f"   MLflow URI: {mlflow_uri}")

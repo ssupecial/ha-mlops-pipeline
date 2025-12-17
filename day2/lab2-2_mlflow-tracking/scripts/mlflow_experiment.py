@@ -32,7 +32,7 @@ os.environ["AWS_SECRET_ACCESS_KEY"] = AWS_SECRET_ACCESS_KEY
 os.environ["AWS_DEFAULT_REGION"] = AWS_REGION
 
 # MLflow 설정
-mlflow.set_tracking_uri("http://mlflow-server-service.mlflow-system.svc.cluster.local:5000")
+mlflow.set_tracking_uri("http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000")
 
 try:
     s3_client = boto3.client('s3', region_name=AWS_REGION)

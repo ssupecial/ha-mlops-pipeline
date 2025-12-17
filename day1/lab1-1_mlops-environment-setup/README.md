@@ -338,11 +338,11 @@ export USER_NUM="01"  # 본인 번호로 변경
 ### MLflow Server 확인
 
 ```bash
-# MLflow 파드 상태 확인
-kubectl get pods -n mlflow-system -l app=mlflow-server
+# MLflow 파드 상태 확인 (자신의 네임스페이스)
+kubectl get pods -n kubeflow-user${USER_NUM} -l app=mlflow-server
 
 # MLflow 서비스 확인
-kubectl get svc -n mlflow-system
+kubectl get svc -n kubeflow-user${USER_NUM} | grep mlflow
 
 # PostgreSQL 상태 확인 (MLflow Backend)
 kubectl get pods -n mlflow-system -l app=postgres
@@ -352,7 +352,7 @@ kubectl get pods -n mlflow-system -l app=postgres
 
 ```bash
 # MLflow UI 포트 포워딩
-kubectl port-forward svc/mlflow-server-service -n mlflow-system 5000:5000
+kubectl port-forward svc/mlflow-server -n kubeflow-user${USER_NUM} 5000:5000
 
 # 브라우저에서 접속
 # http://localhost:5000
@@ -371,7 +371,7 @@ kubectl get poddefault access-mlflow -n kubeflow-user${USER_NUM} -o yaml
 ```yaml
 env:
 - name: MLFLOW_TRACKING_URI
-  value: "http://mlflow-server-service.mlflow-system.svc.cluster.local:5000"
+  value: "http://mlflow-server.kubeflow-user{XX}.svc.cluster.local:5000"
 - name: MLFLOW_S3_ENDPOINT_URL
   value: "https://s3.ap-northeast-2.amazonaws.com"
 - name: AWS_DEFAULT_REGION

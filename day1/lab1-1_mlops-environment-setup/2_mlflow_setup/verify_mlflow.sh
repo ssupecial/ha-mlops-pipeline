@@ -312,25 +312,24 @@ echo "============================================================"
 echo "[6/7] MLflow Tracking Server 연결 확인"
 echo "============================================================"
 
-# MLflow Server Pod 확인
-MLFLOW_POD=$(kubectl get pods -n mlflow-system -l app=mlflow-server -o jsonpath='{.items[0].metadata.name}' 2>/dev/null)
+# 사용자 네임스페이스의 MLflow Server Pod 확인
+MLFLOW_POD=$(kubectl get pods -n $NAMESPACE -l app=mlflow-server -o jsonpath='{.items[0].metadata.name}' 2>/dev/null)
 
 if [ -n "$MLFLOW_POD" ]; then
-    # Pod 상태 확인
-    MLFLOW_STATUS=$(kubectl get pods -n mlflow-system -l app=mlflow-server -o jsonpath='{.items[0].status.phase}' 2>/dev/null)
+    MLFLOW_STATUS=$(kubectl get pods -n $NAMESPACE -l app=mlflow-server -o jsonpath='{.items[0].status.phase}' 2>/dev/null)
     
     if [ "$MLFLOW_STATUS" == "Running" ]; then
-        echo -e "${GREEN}✅ MLflow Server 실행 중${NC}"
+        echo -e "${GREEN}✅ MLflow Server 실행 중 (멀티테넌트)${NC}"
         echo "   Pod: ${MLFLOW_POD}"
-        echo "   상태: ${MLFLOW_STATUS}"
+        echo "   Namespace: ${NAMESPACE}"
         
         # Service 확인
-        MLFLOW_SVC=$(kubectl get svc -n mlflow-system -l app=mlflow-server -o jsonpath='{.items[0].metadata.name}' 2>/dev/null)
+        MLFLOW_SVC=$(kubectl get svc mlflow-server -n $NAMESPACE -o jsonpath='{.metadata.name}' 2>/dev/null)
         if [ -n "$MLFLOW_SVC" ]; then
-            MLFLOW_PORT=$(kubectl get svc ${MLFLOW_SVC} -n mlflow-system -o jsonpath='{.spec.ports[0].port}' 2>/dev/null)
-            echo "   Service: ${MLFLOW_SVC}:${MLFLOW_PORT}"
+            MLFLOW_PORT=$(kubectl get svc mlflow-server -n $NAMESPACE -o jsonpath='{.spec.ports[0].port}' 2>/dev/null)
+            echo "   Service: mlflow-server:${MLFLOW_PORT}"
             echo ""
-            echo "   내부 접속 URL: http://${MLFLOW_SVC}.mlflow-system.svc.cluster.local:${MLFLOW_PORT}"
+            echo "   내부 접속 URL: http://mlflow-server.${NAMESPACE}.svc.cluster.local:${MLFLOW_PORT}"
         fi
         
         ((pass++))
@@ -339,10 +338,10 @@ if [ -n "$MLFLOW_POD" ]; then
         ((warn++))
     fi
 else
-    echo -e "${RED}❌ MLflow Server를 찾을 수 없습니다${NC}"
+    echo -e "${RED}❌ MLflow Server를 찾을 수 없습니다 (Namespace: ${NAMESPACE})${NC}"
     echo ""
     echo -e "${YELLOW}💡 해결 방법:${NC}"
-    echo "   강사에게 MLflow Server 배포를 요청하세요."
+    echo "   강사에게 MLflow 멀티테넌트 배포를 요청하세요."
     ((fail++))
 fi
 

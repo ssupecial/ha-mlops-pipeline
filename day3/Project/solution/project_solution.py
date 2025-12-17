@@ -19,7 +19,7 @@ from kfp import compiler
 # ============================================================
 TEAM_NAME = os.environ.get("TEAM_NAME", "solution-team")
 USER_NAMESPACE = os.environ.get("NAMESPACE", "kubeflow-user-example-com")
-MLFLOW_TRACKING_URI = "http://mlflow-server-service.mlflow-system.svc.cluster.local:5000"
+MLFLOW_TRACKING_URI = "http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000"
 
 
 # ============================================================
@@ -454,7 +454,7 @@ def project_pipeline(
     experiment_name: str = "solution-experiment",
     model_name: str = "solution-model",
     namespace: str = "kubeflow-user-example-com",
-    mlflow_tracking_uri: str = "http://mlflow-server-service.mlflow-system.svc.cluster.local:5000",
+    mlflow_tracking_uri: str = "http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000",
     n_estimators: int = 100,
     max_depth: int = 10,
     r2_threshold: float = 0.75

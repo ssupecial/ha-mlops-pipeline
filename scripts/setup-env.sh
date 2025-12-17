@@ -61,7 +61,7 @@ export ECR_CALIFORNIA_HOUSING_IMAGE="${ECR_REGISTRY}/${ECR_CALIFORNIA_HOUSING_RE
 # ============================================================
 # MLflow 설정
 # ============================================================
-export MLFLOW_TRACKING_URI="http://mlflow-server-service.mlflow-system.svc.cluster.local:5000"
+export MLFLOW_TRACKING_URI="http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000"
 
 # ============================================================
 # Kubeflow 설정

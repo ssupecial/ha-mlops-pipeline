@@ -101,7 +101,7 @@ pip install -r requirements.txt
 import mlflow
 
 # Kubeflow 내부에서 연결 (클러스터 DNS 사용)
-mlflow.set_tracking_uri("http://mlflow-server-service.mlflow-system.svc.cluster.local:5000")
+mlflow.set_tracking_uri("http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000")
 
 # 연결 테스트
 print(mlflow.get_tracking_uri())
@@ -139,7 +139,7 @@ print(f"MLflow Version: {mlflow.__version__}")
 
 ```python
 # Tracking URI 설정 (Kubeflow 내부)
-MLFLOW_TRACKING_URI = "http://mlflow-server-service.mlflow-system.svc.cluster.local:5000"
+MLFLOW_TRACKING_URI = "http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000"
 mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
 
 # 실험 설정
@@ -437,7 +437,15 @@ with mlflow.start_run(run_name="rf-registry-v2"):
 
 ```bash
 # 터미널에서 실행 (클라이언트 PC)
-kubectl port-forward svc/mlflow-server-service -n mlflow-system 5000:5000
+# USER_NUM을 본인 번호로 변경 (예: 01, 02, ..., 20)
+kubectl port-forward svc/mlflow-server -n kubeflow-user${USER_NUM} 5000:5000
+
+> ℹ️ **멀티테넌트 환경**
+> 
+> 각 사용자는 독립된 MLflow 서버를 가지고 있습니다.
+> - 자신의 실험만 보입니다 (다른 사용자 실험 격리)
+> - 실험 이름에 user prefix를 붙일 필요가 없습니다
+> - Artifact는 자신의 S3 버킷에 저장됩니다
 
 # 브라우저에서 접속
 http://localhost:5000

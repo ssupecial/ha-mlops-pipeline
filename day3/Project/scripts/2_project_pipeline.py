@@ -36,7 +36,7 @@ TEAM_NAME = "team-XX"                        # 예: team-01, team-02, ...
 USER_NAMESPACE = "kubeflow-user-example-com" # 현재 Kubeflow 프로필 네임스페이스
 
 # MLflow 설정 (변경 불필요)
-MLFLOW_TRACKING_URI = "http://mlflow-server-service.mlflow-system.svc.cluster.local:5000"
+MLFLOW_TRACKING_URI = "http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000"
 
 
 # ============================================================
@@ -522,7 +522,7 @@ def project_pipeline(
     experiment_name: str = "team-XX-experiment",
     model_name: str = "team-XX-model",
     namespace: str = "kubeflow-user-example-com",
-    mlflow_tracking_uri: str = "http://mlflow-server-service.mlflow-system.svc.cluster.local:5000",
+    mlflow_tracking_uri: str = "http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000",
     n_estimators: int = 100,
     max_depth: int = 10,
     r2_threshold: float = 0.75

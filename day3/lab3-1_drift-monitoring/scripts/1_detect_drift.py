@@ -19,7 +19,7 @@ print()
 # 환경 변수
 MLFLOW_TRACKING_URI = os.getenv(
     'MLFLOW_TRACKING_URI',
-    'http://mlflow-server-service.mlflow-system.svc.cluster.local:5000'
+    'http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000'
 )
 EXPERIMENT_NAME = "drift-monitoring"
 

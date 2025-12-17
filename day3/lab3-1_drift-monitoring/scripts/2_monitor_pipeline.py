@@ -88,7 +88,7 @@ def log_metrics(drift_result: str) -> str:
     # Parse JSON
     result = json.loads(drift_result)
     
-    mlflow_uri = "http://mlflow-server-service.mlflow-system.svc.cluster.local:5000"
+    mlflow_uri = "http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000"
     mlflow.set_tracking_uri(mlflow_uri)
     mlflow.set_experiment("drift-monitoring-pipeline")
     

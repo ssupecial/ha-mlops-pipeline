@@ -79,7 +79,7 @@ python scripts/1_onnx_conversion.py
 python scripts/2_quantization.py
 
 # Part 3: 벤치마크 & MLflow 기록
-export MLFLOW_TRACKING_URI=http://mlflow-server-service.mlflow-system.svc.cluster.local:5000
+export MLFLOW_TRACKING_URI=http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000
 python scripts/3_benchmark.py
 ```
 
@@ -145,7 +145,7 @@ print(sts.get_caller_identity()['Arn'])
 echo $MLFLOW_TRACKING_URI
 
 # 수동 설정
-export MLFLOW_TRACKING_URI=http://mlflow-server-service.mlflow-system.svc.cluster.local:5000
+export MLFLOW_TRACKING_URI=http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000
 ```
 
 ### 4. ONNX 변환 시 경고

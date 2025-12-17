@@ -19,7 +19,7 @@ def check_drift_and_decide(drift_threshold: float = 0.3) -> str:
     import mlflow
     import json
     
-    mlflow_uri = "http://mlflow-server-service.mlflow-system.svc.cluster.local:5000"
+    mlflow_uri = "http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000"
     mlflow.set_tracking_uri(mlflow_uri)
     mlflow.set_experiment("drift-monitoring-pipeline")
     
@@ -89,7 +89,7 @@ def retrain_model(train_size: int = 5000) -> str:
     )
     
     # MLflow setup
-    mlflow_uri = "http://mlflow-server-service.mlflow-system.svc.cluster.local:5000"
+    mlflow_uri = "http://mlflow-server.kubeflow-user${USER_NUM}.svc.cluster.local:5000"
     mlflow.set_tracking_uri(mlflow_uri)
     mlflow.set_experiment("auto-retraining")
     
