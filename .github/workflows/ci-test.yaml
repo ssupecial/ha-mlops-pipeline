@@ -8,11 +8,11 @@ name: CI - Test & Build
 on:
   push:
     branches: [main]
-    paths:
-      - 'day3/lab3-2_monitoring-cicd/src/**'
-      - 'day3/lab3-2_monitoring-cicd/tests/**'
-      - 'day3/lab3-2_monitoring-cicd/requirements.txt'
-      - '.github/workflows/ci-test.yaml'
+    # paths:
+    #   - 'day3/lab3-2_monitoring-cicd/src/**'
+    #   - 'day3/lab3-2_monitoring-cicd/tests/**'
+    #   - 'day3/lab3-2_monitoring-cicd/requirements.txt'
+    #   - '.github/workflows/ci-test.yaml'
   pull_request:
     branches: [main]
 
