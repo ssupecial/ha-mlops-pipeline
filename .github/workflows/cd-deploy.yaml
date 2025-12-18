@@ -10,11 +10,11 @@ on:
   workflow_run:
     workflows: ["CI - Test & Build"]
     types: [completed]
-    branches: [dev]
+    branches: [main]
   
   # main 브랜치에 push 시 자동 실행
   push:
-    branches: [dev]
+    branches: [main]
     paths:
       - 'day3/lab3-2_monitoring-cicd/**'
       - '.github/workflows/cd-deploy.yaml'
